@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Hero Page - Kagura</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background: url("KAGURA BG.jpg") no-repeat center center fixed;
+      background-size: cover;
+      color: white;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+    }
+
+    .hero-card {
+      background: rgba(0,0,0,0.7);
+      border-radius: 12px;
+      padding: 20px;
+      width: 320px;
+      text-align: center;
+      box-shadow: 0 8px 20px rgba(0,0,0,0.5);
+      animation: fadeIn 1s ease-in;
+    }
+
+    .hero-card img {
+      width: 100%;
+      border-radius: 10px;
+      margin-bottom: 15px;
+    }
+
+    .hero-card h2 {
+      margin: 10px 0;
+      font-size: 22px;
+      color: #ffd700; /* gold accent */
+    }
+
+    .hero-card p {
+      margin: 5px 0;
+      font-size: 14px;
+      color: #ddd;
+    }
+
+    .hero-card button {
+      margin-top: 15px;
+      padding: 10px 20px;
+      background: #ff4500;
+      border: none;
+      border-radius: 6px;
+      color: white;
+      font-size: 16px;
+      cursor: pointer;
+      transition: transform 0.2s, background 0.3s;
+    }
+
+    .hero-card button:hover {
+      background: #ff6347;
+      transform: scale(1.1);
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .message {
+      margin-top: 10px;
+      font-size: 14px;
+      color: #00ffcc;
+    }
+  </style>
+</head>
+<body>
+  <div class="hero-card">
+    <!-- Replace with Kagura's image -->
+    <img src="kagura.jpg" alt="Kagura">
+    <h2>Kagura</h2>
+    <p>Role: Mage</p>
+    <p>Difficulty: Hard</p>
+    <button id="selectBtn">Select Hero</button>
+    <div class="message" id="message"></div>
+  </div>
+
+  <script>
+    const btn = document.getElementById('selectBtn');
+    const msg = document.getElementById('message');
+
+    btn.addEventListener('click', () => {
+      msg.textContent = "Kagura Selected! ✨";
+    });
+  </script>
+</body>
+</html>
