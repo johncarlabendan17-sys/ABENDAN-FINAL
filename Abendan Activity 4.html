@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Transparent Music Player</title>
+  <link rel="icon" type="image/png" href="sza favicon.png">
+  <style>
+    body {
+      margin: 0;
+      height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background: url('SZA BG.jpg') no-repeat center center/cover;
+      font-family: Arial, sans-serif;
+    }
+
+    .player {
+      background: rgba(0,0,0,0.3); /* transparent overlay */
+      padding: 20px;
+      border-radius: 16px;
+      text-align: center;
+      width: 350px;
+      color: white;
+    }
+
+    .controls {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 25px;
+      margin-top: 15px;
+    }
+
+    .btn {
+      font-size: 28px;
+      border: 2px solid white;
+      background: transparent;
+      color: white;
+      border-radius: 50%;
+      width: 60px;
+      height: 60px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+
+    .btn:hover {
+      background: rgba(255,255,255,0.2);
+      transform: scale(1.1);
+    }
+
+    .progress {
+      width: 100%;
+      margin-top: 20px;
+    }
+  </style>
+</head>
+<body>
+  <div class="player">
+    <!-- Song title -->
+    <h3>Snooze - SZA</h3>
+
+    <!-- Audio element -->
+    <audio id="audio" src="Snooze.mp3"></audio>
+
+    <!-- Controls -->
+    <div class="controls">
+      <button class="btn" id="backward">⏮️</button>
+      <button class="btn" id="playPause">▶️</button>
+      <button class="btn" id="forward">⏭️</button>
+    </div>
+
+    <!-- Progress bar -->
+    <input type="range" id="progress" class="progress" value="0" step="1">
+  </div>
+
+  <script>
+    const audio = document.getElementById('audio');
+    const playPauseBtn = document.getElementById('playPause');
+    const progress = document.getElementById('progress');
+    const forwardBtn = document.getElementById('forward');
+    const backwardBtn = document.getElementById('backward');
+
+    // Toggle play/pause
+    playPauseBtn.addEventListener('click', () => {
+      if (audio.paused) {
+        audio.play();
+        playPauseBtn.textContent = '⏸️';
+      } else {
+        audio.pause();
+        playPauseBtn.textContent = '▶️';
+      }
+    });
+
+    // Forward 10 seconds
+    forwardBtn.addEventListener('click', () => {
+      audio.currentTime += 10;
+    });
+
+    // Backward 10 seconds
+    backwardBtn.addEventListener('click', () => {
+      audio.currentTime -= 10;
+    });
+
+    // Update progress bar
+    audio.addEventListener('timeupdate', () => {
+      progress.max = audio.duration;
+      progress.value = audio.currentTime;
+    });
+
+    // Seek when user moves progress bar
+    progress.addEventListener('input', () => {
+      audio.currentTime = progress.value;
+    });
+  </script>
+</body>
+</html>
