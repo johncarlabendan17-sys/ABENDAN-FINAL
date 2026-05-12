@@ -1,0 +1,912 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ACRL</title>
+<link rel="icon" type="image/png" href="ACRL.png">
+
+
+<style>
+
+/* ================= GENERAL ================= */
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+body{
+    font-family:Arial, sans-serif;
+    overflow:hidden;
+}
+
+/* ================= LOGIN PAGE ================= */
+
+#login-screen{
+    position:fixed;
+    inset:0;
+    background:linear-gradient(135deg,#67c6ff,#8ed8ff,#b8ebff);
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    overflow:hidden;
+    z-index:9999;
+}
+
+/* BUBBLES */
+
+.bubble{
+    position:absolute;
+    border-radius:50%;
+    background:rgba(255,255,255,0.2);
+    animation:float 10s infinite ease-in-out;
+}
+
+.b1{
+    width:220px;
+    height:220px;
+    top:-70px;
+    left:-70px;
+}
+
+.b2{
+    width:170px;
+    height:170px;
+    bottom:-50px;
+    right:-50px;
+    animation-delay:2s;
+}
+
+.b3{
+    width:120px;
+    height:120px;
+    left:10%;
+    bottom:15%;
+    animation-delay:4s;
+}
+
+@keyframes float{
+    0%{transform:translateY(0);}
+    50%{transform:translateY(20px);}
+    100%{transform:translateY(0);}
+}
+
+/* LOGIN BOX */
+
+.login-box{
+    width:360px;
+    background:rgba(255,255,255,0.2);
+    backdrop-filter:blur(14px);
+    border-radius:25px;
+    padding:40px;
+    text-align:center;
+    box-shadow:0 10px 30px rgba(0,0,0,0.2);
+    animation:fadeIn 1s ease;
+}
+
+.logo{
+    font-size:70px;
+    font-weight:900;
+    color:white;
+    font-family:cursive;
+    letter-spacing:6px;
+    margin-bottom:10px;
+    text-shadow:0 5px 12px rgba(0,0,0,0.2);
+}
+
+.subtitle{
+    color:white;
+    margin-bottom:30px;
+    letter-spacing:2px;
+    font-size:14px;
+}
+
+.input-box{
+    margin-bottom:18px;
+}
+
+.input-box input{
+    width:100%;
+    padding:14px;
+    border:none;
+    border-radius:14px;
+    outline:none;
+    background:rgba(255,255,255,0.7);
+    font-size:15px;
+}
+
+.login-btn{
+    width:100%;
+    padding:14px;
+    border:none;
+    border-radius:14px;
+    background:white;
+    color:#3498db;
+    font-weight:bold;
+    font-size:16px;
+    cursor:pointer;
+    transition:0.3s;
+}
+
+.login-btn:hover{
+    transform:scale(1.03);
+    background:#e9f8ff;
+}
+
+.error{
+    margin-top:12px;
+    color:white;
+    display:none;
+}
+
+.fade-out{
+    animation:fadeOut 1s forwards;
+}
+
+@keyframes fadeOut{
+    to{
+        opacity:0;
+        visibility:hidden;
+    }
+}
+
+@keyframes fadeIn{
+    from{
+        opacity:0;
+        transform:translateY(20px);
+    }
+    to{
+        opacity:1;
+        transform:translateY(0);
+    }
+}
+
+/* ================= MAIN CONTENT ================= */
+
+#main-content{
+    display:none;
+    animation:openSite 1s ease;
+}
+
+@keyframes openSite{
+    from{
+        opacity:0;
+        transform:scale(1.05);
+        filter:blur(10px);
+    }
+    to{
+        opacity:1;
+        transform:scale(1);
+        filter:blur(0);
+    }
+}
+
+/* ================= NAVBAR ================= */
+
+nav{
+    position:fixed;
+    top:0;
+    width:100%;
+    background:rgba(255,255,255,0.35);
+    backdrop-filter:blur(12px);
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    padding:18px 35px;
+    z-index:1000;
+}
+
+.nav-logo{
+    font-size:28px;
+    font-weight:bold;
+    color:#24506b;
+}
+
+.nav-links{
+    display:flex;
+    gap:25px;
+}
+
+.nav-links a{
+    text-decoration:none;
+    color:#24506b;
+    font-weight:bold;
+    transition:0.3s;
+}
+
+.nav-links a:hover{
+    color:#5bbce9;
+}
+
+/* ================= PAGE ================= */
+
+.page{
+    display:none;
+    min-height:100vh;
+    justify-content:center;
+    align-items:center;
+    padding-top:90px;
+}
+
+.active-page{
+    display:flex;
+}
+
+/* ================= PAGE 1 ================= */
+
+#page1{
+    background:url("KAGURABG.jpg") no-repeat center center/cover;
+}
+
+.hero-card{
+    background:rgba(0,0,0,0.7);
+    border-radius:18px;
+    padding:25px;
+    width:320px;
+    text-align:center;
+    color:white;
+    box-shadow:0 8px 20px rgba(0,0,0,0.5);
+}
+
+.hero-card img{
+    width:100%;
+    border-radius:12px;
+    margin-bottom:15px;
+}
+
+.hero-card h2{
+    color:#ffd700;
+    margin-bottom:10px;
+}
+
+.hero-card button{
+    margin-top:15px;
+    padding:10px 20px;
+    background:#ff4500;
+    border:none;
+    border-radius:8px;
+    color:white;
+    cursor:pointer;
+    transition:0.3s;
+}
+
+.hero-card button:hover{
+    background:#ff6347;
+    transform:scale(1.08);
+}
+
+.message{
+    margin-top:10px;
+    color:#00ffcc;
+}
+
+/* ================= PAGE 2 ================= */
+
+#page2{
+    background:url("SZABG.jpg") no-repeat center center/cover;
+}
+
+.player{
+    background:rgba(0,0,0,0.3);
+    padding:25px;
+    border-radius:20px;
+    width:350px;
+    text-align:center;
+    color:white;
+    backdrop-filter:blur(10px);
+}
+
+.controls{
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    gap:25px;
+    margin-top:15px;
+}
+
+.btn{
+    font-size:28px;
+    border:2px solid white;
+    background:transparent;
+    color:white;
+    border-radius:50%;
+    width:60px;
+    height:60px;
+    cursor:pointer;
+    transition:0.3s;
+}
+
+.btn:hover{
+    background:rgba(255,255,255,0.2);
+    transform:scale(1.1);
+}
+
+.progress{
+    width:100%;
+    margin-top:20px;
+}
+
+/* ================= PAGE 3 ================= */
+
+#page3{
+    background:#f4f4f4;
+}
+
+.button-container{
+    display:flex;
+    flex-wrap:wrap;
+    gap:20px;
+    justify-content:center;
+}
+
+.uber-btn{
+    background:black;
+    color:white;
+    padding:12px 24px;
+    border:none;
+    cursor:pointer;
+}
+
+.amazon-btn{
+    background:rgb(255,216,20);
+    padding:12px 24px;
+    border:none;
+    border-radius:20px;
+    cursor:pointer;
+    font-weight:bold;
+}
+
+.github-btn{
+    background:rgb(46,164,79);
+    color:white;
+    padding:12px 24px;
+    border:none;
+    border-radius:6px;
+    cursor:pointer;
+    font-weight:bold;
+}
+
+.bootstrap-btn{
+    padding:12px 24px;
+    border:none;
+    border-radius:6px;
+    cursor:pointer;
+    font-weight:bold;
+}
+
+.bootstrap-primary{
+    background:rgb(121,82,179);
+    color:white;
+}
+
+.bootstrap-secondary{
+    background:rgb(108,117,125);
+    color:white;
+}
+
+.linkedin-btn{
+    padding:12px 24px;
+    border-radius:6px;
+    cursor:pointer;
+    font-weight:bold;
+}
+
+.linkedin-primary{
+    background:rgb(10,102,194);
+    color:white;
+    border:none;
+}
+
+.linkedin-secondary{
+    background:white;
+    color:rgb(10,102,194);
+    border:2px solid rgb(10,102,194);
+}
+
+/* ================= PAGE 4 ================= */
+
+#page4{
+    background:#f4f4f4;
+}
+
+#page4 .button-container{
+    display:flex;
+    flex-wrap:wrap;
+    gap:20px;
+    justify-content:center;
+}
+
+#page4 button{
+    padding:12px 24px;
+    border:none;
+    border-radius:6px;
+    font-size:16px;
+    cursor:pointer;
+    transition:all 0.3s ease;
+    font-weight:bold;
+}
+
+/* UBER */
+
+.uber{
+    background:black;
+    color:white;
+    box-shadow:0 4px 10px rgba(0,0,0,0.25);
+}
+
+.uber:hover{
+    background:#333;
+    transform:translateY(-2px);
+    box-shadow:0 8px 18px rgba(0,0,0,0.35);
+}
+
+/* AMAZON */
+
+.amazon{
+    background:rgb(255,216,20);
+    color:black;
+    border-radius:20px !important;
+    box-shadow:0 4px 10px rgba(255,216,20,0.35);
+}
+
+.amazon:hover{
+    background:#f7ca00;
+    transform:scale(1.05);
+    box-shadow:0 8px 18px rgba(255,216,20,0.55);
+}
+
+/* GITHUB */
+
+.github{
+    background:rgb(46,164,79);
+    color:white;
+    border-radius:6px;
+    box-shadow:0 4px 10px rgba(46,164,79,0.35);
+}
+
+.github:hover{
+    background:#2c974b;
+    transform:scale(1.05);
+    box-shadow:0 8px 18px rgba(46,164,79,0.55);
+}
+
+/* BOOTSTRAP START */
+
+.bootstrap-start{
+    background:rgb(121,82,179);
+    color:white;
+    box-shadow:0 4px 10px rgba(121,82,179,0.35);
+}
+
+.bootstrap-start:hover{
+    background:#6f42c1;
+    transform:translateY(-2px);
+    box-shadow:0 8px 18px rgba(121,82,179,0.55);
+}
+
+/* BOOTSTRAP DOWNLOAD */
+
+.bootstrap-download{
+    background:rgb(108,117,125);
+    color:white;
+    box-shadow:0 4px 10px rgba(108,117,125,0.35);
+}
+
+.bootstrap-download:hover{
+    background:#5a6268;
+    transform:translateY(-2px);
+    box-shadow:0 8px 18px rgba(108,117,125,0.55);
+}
+
+/* LINKEDIN APPLY */
+
+.linkedin-apply{
+    background:rgb(10,102,194);
+    color:white;
+    box-shadow:0 4px 10px rgba(10,102,194,0.35);
+}
+
+.linkedin-apply:hover{
+    background:#004182;
+    transform:scale(1.05);
+    box-shadow:0 8px 18px rgba(10,102,194,0.55);
+}
+
+/* LINKEDIN SAVE */
+
+.linkedin-save{
+    background:white;
+    color:rgb(10,102,194);
+    border:2px solid rgb(10,102,194) !important;
+    box-shadow:0 4px 10px rgba(10,102,194,0.15);
+}
+
+.linkedin-save:hover{
+    background:rgb(10,102,194);
+    color:white;
+    transform:scale(1.05);
+    box-shadow:0 8px 18px rgba(10,102,194,0.45);
+}
+
+/* ================= PAGINATION ================= */
+
+.pagination{
+    position:fixed;
+    bottom:20px;
+    width:100%;
+    display:flex;
+    justify-content:center;
+    gap:12px;
+    z-index:999;
+}
+
+.pagination button{
+    width:46px;
+    height:46px;
+    border:none;
+    border-radius:50%;
+    background:white;
+    color:#24506b;
+    font-weight:bold;
+    cursor:pointer;
+    transition:0.3s;
+    box-shadow:0 4px 10px rgba(0,0,0,0.15);
+}
+
+.pagination button:hover,
+.pagination button.active{
+    background:#5bbce9;
+    color:white;
+    transform:scale(1.1);
+}
+
+</style>
+</head>
+
+<body>
+
+<!-- ================= LOGIN ================= -->
+
+<div id="login-screen">
+
+    <div class="bubble b1"></div>
+    <div class="bubble b2"></div>
+    <div class="bubble b3"></div>
+
+    <div class="login-box">
+
+        <div class="logo">ACRL</div>
+
+        <div class="subtitle">
+            COOL ACTIVITY PORTAL
+        </div>
+
+        <div class="input-box">
+            <input type="text" id="username" placeholder="Username">
+        </div>
+
+        <div class="input-box">
+            <input type="password" id="password" placeholder="Password">
+        </div>
+
+        <button class="login-btn" onclick="login()">
+            LOGIN
+        </button>
+
+        <div class="error" id="error">
+            Please fill in all fields
+        </div>
+
+    </div>
+
+</div>
+
+<!-- ================= MAIN ================= -->
+
+<div id="main-content">
+
+<nav>
+
+    <div class="nav-logo">ACRL</div>
+
+    <div class="nav-links">
+        <a href="#" onclick="goTo(1)">Hero</a>
+        <a href="#" onclick="goTo(2)">Music</a>
+        <a href="#" onclick="goTo(3)">Buttons</a>
+        <a href="#" onclick="goTo(4)">Hover</a>
+    </div>
+
+</nav>
+
+<!-- PAGE 1 -->
+
+<div class="page active-page" id="page1">
+
+    <div class="hero-card">
+
+        <img src="kagura.jpg" alt="Kagura">
+
+        <h2>Kagura</h2>
+
+        <p>Role: Mage</p>
+
+        <p>Difficulty: Hard</p>
+
+        <button id="selectBtn">
+            Select Hero
+        </button>
+
+        <div class="message" id="message"></div>
+
+    </div>
+
+</div>
+
+<!-- PAGE 2 -->
+
+<div class="page" id="page2">
+
+    <div class="player">
+
+        <h3>Snooze - SZA</h3>
+
+        <audio id="audio" src="Snooze.mp3"></audio>
+
+        <div class="controls">
+
+            <button class="btn" id="backward">
+                ⏮️
+            </button>
+
+            <button class="btn" id="playPause">
+                ▶️
+            </button>
+
+            <button class="btn" id="forward">
+                ⏭️
+            </button>
+
+        </div>
+
+        <input type="range" id="progress" class="progress">
+
+    </div>
+
+</div>
+
+<!-- PAGE 3 -->
+
+<div class="page" id="page3">
+
+    <div class="button-container">
+
+        <button class="uber-btn">
+            Request now
+        </button>
+
+        <button class="amazon-btn">
+            Add to Cart
+        </button>
+
+        <button class="github-btn">
+            Sign up
+        </button>
+
+        <button class="bootstrap-btn bootstrap-primary">
+            Get started
+        </button>
+
+        <button class="bootstrap-btn bootstrap-secondary">
+            Download
+        </button>
+
+        <button class="linkedin-btn linkedin-primary">
+            Apply on company website
+        </button>
+
+        <button class="linkedin-btn linkedin-secondary">
+            Save
+        </button>
+
+    </div>
+
+</div>
+
+<!-- PAGE 4 -->
+
+<div class="page" id="page4">
+
+    <div class="button-container">
+
+        <button class="uber">
+            Request now
+        </button>
+
+        <button class="amazon">
+            Add to Cart
+        </button>
+
+        <button class="github">
+            Sign up
+        </button>
+
+        <button class="bootstrap-start">
+            Get started
+        </button>
+
+        <button class="bootstrap-download">
+            Download
+        </button>
+
+        <button class="linkedin-apply">
+            Apply on company website
+        </button>
+
+        <button class="linkedin-save">
+            Save
+        </button>
+
+    </div>
+
+</div>
+
+<!-- PAGINATION -->
+
+<div class="pagination">
+
+    <button onclick="goTo(1)" id="p1" class="active">
+        1
+    </button>
+
+    <button onclick="goTo(2)" id="p2">
+        2
+    </button>
+
+    <button onclick="goTo(3)" id="p3">
+        3
+    </button>
+
+    <button onclick="goTo(4)" id="p4">
+        4
+    </button>
+
+</div>
+
+</div>
+
+<script>
+
+/* LOGIN */
+
+function login(){
+
+    const username =
+    document.getElementById('username').value;
+
+    const password =
+    document.getElementById('password').value;
+
+    if(username === '' || password === ''){
+
+        document.getElementById('error')
+        .style.display = 'block';
+
+        return;
+    }
+
+    document.getElementById('login-screen')
+    .classList.add('fade-out');
+
+    setTimeout(() => {
+
+        document.getElementById('login-screen')
+        .style.display = 'none';
+
+        document.getElementById('main-content')
+        .style.display = 'block';
+
+    },1000);
+}
+
+/* PAGE SWITCH */
+
+function goTo(page){
+
+    const pages =
+    document.querySelectorAll('.page');
+
+    pages.forEach(p => {
+
+        p.classList.remove('active-page');
+    });
+
+    document.getElementById('page' + page)
+    .classList.add('active-page');
+
+    const buttons =
+    document.querySelectorAll('.pagination button');
+
+    buttons.forEach(btn => {
+
+        btn.classList.remove('active');
+    });
+
+    document.getElementById('p' + page)
+    .classList.add('active');
+}
+
+/* HERO BUTTON */
+
+const btn =
+document.getElementById('selectBtn');
+
+const msg =
+document.getElementById('message');
+
+btn.addEventListener('click', () => {
+
+    msg.textContent =
+    "Kagura Selected! ✨";
+});
+
+/* MUSIC PLAYER */
+
+const audio =
+document.getElementById('audio');
+
+const playPauseBtn =
+document.getElementById('playPause');
+
+const progress =
+document.getElementById('progress');
+
+const forwardBtn =
+document.getElementById('forward');
+
+const backwardBtn =
+document.getElementById('backward');
+
+playPauseBtn.addEventListener('click', () => {
+
+    if(audio.paused){
+
+        audio.play();
+
+        playPauseBtn.textContent = '⏸️';
+
+    }else{
+
+        audio.pause();
+
+        playPauseBtn.textContent = '▶️';
+    }
+});
+
+forwardBtn.addEventListener('click', () => {
+
+    audio.currentTime += 10;
+});
+
+backwardBtn.addEventListener('click', () => {
+
+    audio.currentTime -= 10;
+});
+
+audio.addEventListener('timeupdate', () => {
+
+    progress.max = audio.duration;
+
+    progress.value = audio.currentTime;
+});
+
+progress.addEventListener('input', () => {
+
+    audio.currentTime = progress.value;
+});
+
+</script>
+
+</body>
+</html>
